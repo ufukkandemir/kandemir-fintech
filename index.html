@@ -23,13 +23,21 @@
             position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
             background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000;
         }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; text-decoration: none;}
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; text-decoration: none; z-index: 1002;}
         .logo span { color: var(--accent); }
+        
         nav { display: flex; gap: 30px; align-items: center; }
         nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         nav a:hover { color: var(--text-main); }
         .btn-primary { background-color: var(--text-main); color: #fff !important; padding: 12px 24px; border-radius: 100px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid var(--text-main); cursor: pointer;}
         .btn-primary:hover { background-color: transparent; color: var(--text-main) !important; }
+
+        /* Hamburger Menü Butonu */
+        .menu-btn { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 1002; }
+        .menu-btn span { width: 30px; height: 3px; background-color: var(--text-main); border-radius: 3px; transition: all 0.3s ease-in-out; pointer-events: none; }
+        .menu-btn.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-btn.open span:nth-child(2) { opacity: 0; }
+        .menu-btn.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
         section { padding: 120px 5% 60px; max-width: 1400px; margin: 0 auto; }
         .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; letter-spacing: -1px; }
@@ -60,7 +68,30 @@
         .cta-banner p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 60px; color: var(--text-muted); font-size: 0.9rem; }
-        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .benefits-grid { grid-template-columns: 1fr; } nav { display: none; } }
+
+        /* MOBİL UYUM (RESPONSIVE) AYARLARI */
+        @media (max-width: 768px) { 
+            .menu-btn { display: flex; }
+            nav { 
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; 
+                background: var(--surface); flex-direction: column; justify-content: center; gap: 40px;
+                transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1001;
+            }
+            nav.active { right: 0; }
+            nav a { font-size: 1.5rem; }
+            
+            section { padding: 100px 5% 40px; }
+            .hero h1 { font-size: 2.8rem; letter-spacing: -1px;} 
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .benefits-grid { grid-template-columns: 1fr; gap: 40px;} 
+            .visual-box { height: 250px; }
+            .cta-banner { padding: 40px 20px; }
+            
+            /* Telefondaki dokunmatiği bozmamak için fare efektini gizle */
+            .cursor-dot, .cursor-outline { display: none !important; }
+            body, a, button { cursor: auto !important; }
+        }
 
         /* FARE EFEKTİ STİLLERİ */
         .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); position: fixed; top: 0; left: 0; border-radius: 50%; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); }
@@ -86,6 +117,11 @@
 
     <header>
         <a href="index.html" class="logo">Kandemir<span>FinTech</span></a>
+        
+        <div class="menu-btn">
+            <span></span><span></span><span></span>
+        </div>
+
         <nav>
             <a href="#hizmetler">Hizmetler</a>
             <a href="#faydalar">Çözümler</a>
@@ -141,11 +177,10 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2>Projeyi Konuşalım</h2>
-            <p>Aşağıdaki formu doldurun, talebiniz doğrudan şahsi e-posta adresime düşsün. Size en kısa sürede dönüş yapacağım.</p>
+            <p>Aşağıdaki formu doldurun, talebiniz doğrudan şahsi e-posta adresime düşsün.</p>
             
             <form id="contactForm" action="https://formsubmit.co/ajax/kandemirrufuk2@gmail.com" method="POST">
                 <input type="hidden" name="_captcha" value="false">
-                
                 <div class="input-group">
                     <label>Adınız Soyadınız / Şirketiniz</label>
                     <input type="text" name="İsim" required placeholder="Örn: Ahmet Yılmaz">
@@ -158,9 +193,7 @@
                     <label>Nasıl Yardımcı Olabiliriz?</label>
                     <textarea name="Mesaj" rows="4" required placeholder="Hangi süreçlerinizi hızlandırmak istiyorsunuz?"></textarea>
                 </div>
-
                 <div id="formMessage" style="margin-bottom: 15px; font-weight: 600; text-align: center; font-size: 1.05rem;"></div>
-
                 <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Mesajı Gönder</button>
             </form>
         </div>
@@ -170,21 +203,41 @@
     <div class="cursor-outline"></div>
 
     <script>
+        // --- MOBİL HAMBURGER MENÜ ---
+        const menuBtn = document.querySelector('.menu-btn');
+        const navMenu = document.querySelector('nav');
+        
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            navMenu.classList.toggle('active');
+        });
+
+        // Linke tıklayınca menüyü kapat
+        document.querySelectorAll('nav a, nav button').forEach(link => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('open');
+                navMenu.classList.remove('active');
+            });
+        });
+
         // --- FARE EFEKTİ ---
         const dot = document.querySelector('.cursor-dot');
         const outline = document.querySelector('.cursor-outline');
         const hoverElements = document.querySelectorAll('a, button, input, textarea');
 
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX; const posY = e.clientY;
-            dot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
-            outline.animate({ transform: `translate(${posX}px, ${posY}px) translate(-50%, -50%)` }, { duration: 400, fill: "forwards" });
-        });
+        // Mobilde değilsek fare efektini çalıştır
+        if (window.innerWidth > 768) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX; const posY = e.clientY;
+                dot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
+                outline.animate({ transform: `translate(${posX}px, ${posY}px) translate(-50%, -50%)` }, { duration: 400, fill: "forwards" });
+            });
 
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
-        });
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+            });
+        }
 
         // --- İLETİŞİM MODALI VE FORM GÖNDERİMİ ---
         const modal = document.getElementById("contactModal");
@@ -209,17 +262,13 @@
             submitBtn.innerText = "Gönderiliyor...";
             formMessage.innerText = "";
 
-            // Form verilerini FormSubmit'in istediği JSON formatına çeviriyoruz
             const formData = new FormData(contactForm);
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
 
             fetch(contactForm.action, {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: json
             })
             .then(response => response.json())
@@ -242,7 +291,7 @@
             })
             .catch(error => {
                 formMessage.style.color = "#ef4444";
-                formMessage.innerText = "Bağlantı hatası. Lütfen internetinizi kontrol edin.";
+                formMessage.innerText = "Bağlantı hatası. İnternetinizi kontrol edin.";
                 submitBtn.innerText = "Mesajı Gönder";
             });
         });
