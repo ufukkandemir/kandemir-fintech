@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şirketimiz | Kandemir FinTech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F9FAFB;
+            --surface: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --accent: #2563EB; 
+            --radius: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; cursor: none !important;}
+        a, button { cursor: none !important; }
+
+        header {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000;
+        }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; text-decoration: none;}
+        .logo span { color: var(--accent); }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: var(--text-main); }
+        .btn-primary { background-color: var(--text-main); color: #fff !important; padding: 12px 24px; border-radius: 100px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid var(--text-main); cursor: pointer;}
+        .btn-primary:hover { background-color: transparent; color: var(--text-main) !important; }
+
+        section { padding: 120px 5% 60px; max-width: 1200px; margin: 0 auto; }
+        
+        /* Şirket Vizyonu Alanı */
+        .company-header { text-align: center; margin-bottom: 80px; }
+        .company-header h1 { font-size: 3.5rem; letter-spacing: -1px; margin-bottom: 20px; }
+        .company-header p { font-size: 1.2rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; }
+        
+        .company-stats { display: flex; justify-content: center; gap: 50px; margin-top: 50px; }
+        .stat { text-align: center; }
+        .stat h3 { font-size: 2.5rem; color: var(--accent); margin-bottom: 5px; }
+        .stat p { font-weight: 600; color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;}
+
+        /* Kurucu Alanı */
+        .founder-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: start; background: var(--surface); padding: 60px; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); margin-bottom: 60px;}
+        .founder-img { width: 100%; max-width: 90%; display: block; margin: 0 auto; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .founder-info h2 { font-size: 2.2rem; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .founder-info h4 { color: var(--accent); font-weight: 600; margin-bottom: 25px; font-size: 1.1rem; }
+        .founder-info p { color: var(--text-muted); margin-bottom: 15px; font-size: 1.05rem; }
+        .tags { margin-top: 25px; }
+        .tag { display: inline-block; background: rgba(37, 99, 235, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; margin: 0 8px 8px 0; border: 1px solid rgba(37, 99, 235, 0.2); }
+
+        /* Deneyim Kartları */
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 40px; text-align: center; }
+        .experience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .exp-card { background: var(--surface); padding: 35px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
+        .exp-card:hover { border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .exp-card .date { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 10px; display: block; }
+        .exp-card h3 { font-size: 1.2rem; margin-bottom: 5px; }
+        .exp-card h4 { font-size: 1rem; color: var(--text-main); font-weight: 400; margin-bottom: 15px; }
+        .exp-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 60px; color: var(--text-muted); font-size: 0.9rem; }
+        @media (max-width: 768px) { .founder-grid { grid-template-columns: 1fr; } .founder-img { max-width: 100%; margin-bottom: 30px;} nav { display: none; } }
+
+        /* FARE EFEKTİ STİLLERİ */
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); position: fixed; top: 0; left: 0; border-radius: 50%; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(37, 99, 235, 0.5); position: fixed; top: 0; left: 0; border-radius: 50%; z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; }
+        .cursor-hover { width: 60px; height: 60px; background-color: rgba(37, 99, 235, 0.1); border-color: transparent; }
+
+        /* İLETİŞİM MODALI (POPUP) STİLLERİ */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-content { background: var(--surface); padding: 40px; border-radius: var(--radius); width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: modalFadeIn 0.3s ease; }
+        @keyframes modalFadeIn { from {opacity:0; transform: translateY(-20px);} to {opacity:1; transform: translateY(0);} }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); transition: color 0.2s;}
+        .close-btn:hover { color: var(--text-main); }
+        .modal-content h2 { margin-bottom: 10px; font-size: 1.8rem;}
+        .modal-content p { color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem;}
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+        .input-group input, .input-group textarea { width: 100%; padding: 12px 15px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: inherit; font-size: 1rem; background: var(--bg); transition: border-color 0.3s; }
+        .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Kandemir<span>FinTech</span></a>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+            <a href="index.html#hizmetler">Hizmetler</a>
+            <a href="#sirket">Hakkımızda</a>
+            <button class="btn-primary open-modal-btn">İletişime Geç</button>
+        </nav>
+    </header>
+
+    <section id="sirket" style="padding-top: 160px;">
+        <div class="company-header">
+            <h1>Verinin Gücüyle Büyüyen <br>Şirketler İnşa Ediyoruz</h1>
+            <p>Kandemir FinTech, işletmelerin veri yığınları arasında kaybolmasını engellemek ve geleneksel Excel alışkanlıklarını modern, otomatik sistemlere dönüştürmek vizyonuyla 2026 yılında kuruldu. Bizler sadece danışman değil, sistemlerinizin arka planını kodlayan çözüm ortaklarıyız.</p>
+            
+            <div class="company-stats">
+                <div class="stat"><h3>2026</h3><p>Kuruluş Yılı</p></div>
+                <div class="stat"><h3>100%</h3><p>Veri Güvenliği</p></div>
+                <div class="stat"><h3>%0</h3><p>Manuel Hata Payı</p></div>
+            </div>
+        </div>
+
+        <div class="section-title" style="margin-top: 80px;">Kurucumuz</div>
+        
+        <div class="founder-grid">
+            <div>
+                <img src="profil.jpeg" alt="Ufuk Kandemir" class="founder-img">
+            </div>
+            <div class="founder-info">
+                <h2>Ufuk Kandemir</h2>
+                <h4>FinTech Data Analyst & Kurucu</h4>
+                <p>Ekonomi ve Finans eğitimimi teknolojiyle birleştirdim. Python, SQL ve SAP FI kullanarak karmaşık finansal verilerin içine dalıyor; hazırladığım okuması kolay dashboard'larla şirketlerin çok daha hızlı ve doğru kararlar almasını sağlıyorum.</p>
+                <p>Veriyi sadece raporlamıyor, "konuşturuyorum". Power BI ve Tableau kullanarak görünmeyen performans metriklerini görselleştiriyor; dolandırıcılık (fraud) ve kredi skorlama analizleriyle şirketlerin risk yönetimini üstleniyorum. Amacım FinTech dünyasında verinin gücünü kullanarak gerçek bir değer yaratmak.</p>
+                
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Power BI & Tableau</span>
+                    <span class="tag">SAP FI</span>
+                    <span class="tag">Risk & Fraud Analizi</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Geçmiş Deneyimler & Eğitim</div>
+        
+        <div class="experience-grid">
+            <div class="exp-card">
+                <span class="date">Eylül 2025 - Günümüz</span>
+                <h3>Performans ve Koordinasyon Uzman Yrd.</h3>
+                <h4>Albayrak Finans</h4>
+                <p>Kurumsal performans metriklerinin (KPI) uçtan uca takibi amacıyla SQL ve Power BI tabanlı iş zekası (BI) çözümleri geliştirmekteyim. Veri modelleme ve otomasyon süreçleri ile şube ağının stratejik karar alma mekanizmalarını veri odaklı içgörülerle destekliyorum.</p>
+            </div>
+            <div class="exp-card">
+                <span class="date">Eylül 2022 - Kasım 2023</span>
+                <h3>Cyber Security Analyst</h3>
+                <h4>BGA Bilgi Güvenliği</h4>
+                <p>Kurumsal ağ ve web uygulamalarının güvenlik zafiyetlerini sızma testleri (Penetration Testing) ile proaktif olarak analiz ettim. Siber güvenlik risk haritalarının çıkarılması ve uluslararası standartlara uygun teknik raporlama süreçlerini yönettim.</p>
+            </div>
+            <div class="exp-card">
+                <span class="date">Ocak 2022 - Eylül 2022</span>
+                <h3>Cyber Security Engineer</h3>
+                <h4>Clarusway</h4>
+                <p>Sistem güvenliği mimarisi ve siber tehdit istihbaratı odaklı uygulamalı altyapı projelerinde yer aldım. Ağ güvenliği protokolleri ve siber savunma stratejileri üzerine teknik yetkinliklerimi kurumsal simülasyonlarla pekiştirdim.</p>
+            </div>
+            <div class="exp-card">
+                <span class="date">Mart 2019 - Haziran 2024</span>
+                <h3>Ekonomi ve Finans (Lisans)</h3>
+                <h4>İstanbul Aydın Üniversitesi</h4>
+                <p>Makroekonomik analiz, kurumsal finansman ve risk yönetimi üzerine kapsamlı akademik altyapı. Finansal teknolojiler ve veri analitiği vizyonumun temelini oluşturan, kantitatif analiz ve modelleme odaklı lisans derecesi.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Kandemir FinTech</strong> &copy; 2026. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 10px;">İstanbul, Türkiye | <a href="#" class="open-modal-btn" style="color:var(--text-muted);">Bize Yazın</a></p>
+    </footer>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Projeyi Konuşalım</h2>
+            <p>Aşağıdaki formu doldurun, talebiniz doğrudan şahsi e-posta adresime düşsün. Size en kısa sürede dönüş yapacağım.</p>
+            
+            <form action="https://formsubmit.co/kandemirrufuk2@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <div class="input-group">
+                    <label>Adınız Soyadınız / Şirketiniz</label>
+                    <input type="text" name="İsim" required placeholder="Örn: Ahmet Yılmaz">
+                </div>
+                <div class="input-group">
+                    <label>E-posta Adresiniz</label>
+                    <input type="email" name="Email" required placeholder="ornek@sirketiniz.com">
+                </div>
+                <div class="input-group">
+                    <label>Nasıl Yardımcı Olabiliriz?</label>
+                    <textarea name="Mesaj" rows="4" required placeholder="Hangi süreçlerinizi hızlandırmak istiyorsunuz?"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Mesajı Gönder</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <script>
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        const hoverElements = document.querySelectorAll('a, button, input, textarea');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX; const posY = e.clientY;
+            dot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
+            outline.animate({ transform: `translate(${posX}px, ${posY}px) translate(-50%, -50%)` }, { duration: 400, fill: "forwards" });
+        });
+
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+        });
+
+        const modal = document.getElementById("contactModal");
+        const closeBtn = document.querySelector(".close-btn");
+        const openBtns = document.querySelectorAll('.open-modal-btn');
+
+        openBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.style.display = "flex";
+            });
+        });
+
+        closeBtn.addEventListener('click', () => { modal.style.display = "none"; });
+        window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = "none"; });
+    </script>
+</body>
+</html>

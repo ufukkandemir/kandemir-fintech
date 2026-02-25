@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kandemir FinTech | Yeni Nesil Veri Çözümleri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F9FAFB;
+            --surface: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --accent: #2563EB; 
+            --radius: 24px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.6; overflow-x: hidden; cursor: none !important;}
+        a, button { cursor: none !important; }
+
+        header {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000;
+        }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.5px; text-decoration: none;}
+        .logo span { color: var(--accent); }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: var(--text-main); }
+        .btn-primary { background-color: var(--text-main); color: #fff !important; padding: 12px 24px; border-radius: 100px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: 1px solid var(--text-main); cursor: pointer;}
+        .btn-primary:hover { background-color: transparent; color: var(--text-main) !important; }
+
+        section { padding: 120px 5% 60px; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; letter-spacing: -1px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 60px; max-width: 600px; }
+
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 150px; }
+        .badge { background: rgba(37, 99, 235, 0.1); color: var(--accent); padding: 8px 16px; border-radius: 100px; font-size: 0.9rem; font-weight: 600; margin-bottom: 30px; }
+        .hero h1 { font-size: 4.5rem; font-weight: 700; line-height: 1.1; letter-spacing: -2px; margin-bottom: 25px; max-width: 900px; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin-bottom: 40px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: var(--surface); padding: 40px; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+        .card-icon { width: 60px; height: 60px; background: var(--bg); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 25px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .benefit-list { display: flex; flex-direction: column; gap: 30px; }
+        .benefit-item { display: flex; gap: 20px; }
+        .benefit-number { font-size: 1.5rem; font-weight: 700; color: var(--accent); background: rgba(37, 99, 235, 0.1); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .benefit-text h4 { font-size: 1.2rem; margin-bottom: 5px; }
+        .benefit-text p { color: var(--text-muted); font-size: 0.95rem; }
+        .visual-box { background: #e5e7eb; border-radius: var(--radius); height: 400px; background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000'); background-size: cover; background-position: center; }
+
+        .cta-banner { background: var(--surface); border-radius: var(--radius); padding: 60px; text-align: center; margin-top: 60px; border: 1px solid rgba(0,0,0,0.04); }
+        .cta-banner h2 { font-size: 2rem; margin-bottom: 15px; }
+        .cta-banner p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 60px; color: var(--text-muted); font-size: 0.9rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .benefits-grid { grid-template-columns: 1fr; } nav { display: none; } }
+
+        /* FARE EFEKTİ STİLLERİ */
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); position: fixed; top: 0; left: 0; border-radius: 50%; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(37, 99, 235, 0.5); position: fixed; top: 0; left: 0; border-radius: 50%; z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; }
+        .cursor-hover { width: 60px; height: 60px; background-color: rgba(37, 99, 235, 0.1); border-color: transparent; }
+
+        /* İLETİŞİM MODALI (POPUP) STİLLERİ */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+        .modal-content { background: var(--surface); padding: 40px; border-radius: var(--radius); width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); animation: modalFadeIn 0.3s ease; }
+        @keyframes modalFadeIn { from {opacity:0; transform: translateY(-20px);} to {opacity:1; transform: translateY(0);} }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); transition: color 0.2s;}
+        .close-btn:hover { color: var(--text-main); }
+        .modal-content h2 { margin-bottom: 10px; font-size: 1.8rem;}
+        .modal-content p { color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem;}
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
+        .input-group input, .input-group textarea { width: 100%; padding: 12px 15px; border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; font-family: inherit; font-size: 1rem; background: var(--bg); transition: border-color 0.3s; }
+        .input-group input:focus, .input-group textarea:focus { outline: none; border-color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Kandemir<span>FinTech</span></a>
+        <nav>
+            <a href="#hizmetler">Hizmetler</a>
+            <a href="#faydalar">Çözümler</a>
+            <a href="sirketimiz.html">Şirketimiz & Kurucu</a>
+            <button class="btn-primary open-modal-btn">İletişime Geç</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Yeni Nesil Finansal Teknoloji</div>
+        <h1>Finansal verilerinizi <br>geleceğe taşıyoruz.</h1>
+        <p>Geleneksel Excel tablolarını ve manuel hesaplamaları geride bırakın. İşletmenizin verilerini anlık kararlara ve ölçülebilir kârlılığa dönüştürüyoruz.</p>
+        <a href="#hizmetler" class="btn-primary" style="padding: 16px 32px; font-size: 1.1rem; background: var(--accent); border-color: var(--accent);">Hizmetlerimizi Keşfedin</a>
+    </section>
+
+    <section id="hizmetler">
+        <h2 class="section-title">Neler Yapıyoruz?</h2>
+        <p class="section-subtitle">Veri yığınlarını, yöneticiler için temiz ve aksiyon alınabilir içgörülere dönüştürüyoruz.</p>
+        <div class="services-grid">
+            <div class="card"><div class="card-icon">📊</div><h3>Dinamik Dashboard Kurulumu</h3><p>Nakit akışı ve kârlılık oranlarınızı Power BI ve Tableau ile görselleştiriyor, anlık takip edebileceğiniz paneller tasarlıyoruz.</p></div>
+            <div class="card"><div class="card-icon">⚡</div><h3>Veri ve Süreç Otomasyonu</h3><p>Python ve SQL kullanarak manuel hesaplama süreçlerinizi saniyelere indiriyor, operasyonel hataları sıfırlıyoruz.</p></div>
+            <div class="card"><div class="card-icon">🔄</div><h3>Sistem Entegrasyonları</h3><p>SAP FI ve mevcut sistemlerinizden gelen verileri tek merkezde topluyor, veri kopukluğunu gideriyoruz.</p></div>
+        </div>
+    </section>
+
+    <section id="faydalar">
+        <h2 class="section-title">Size Nasıl Yardım Ederiz?</h2>
+        <p class="section-subtitle">Kandemir FinTech ile çalışmanın işletmenize kazandıracağı doğrudan faydalar.</p>
+        <div class="benefits-grid">
+            <div class="benefit-list">
+                <div class="benefit-item"><div class="benefit-number">1</div><div class="benefit-text"><h4>Zamanı Geri Kazandırırız</h4><p>Rapor hazırlama süreçlerini otomatikleştirerek finans departmanınızın manuel iş yükünü ortadan kaldırırız.</p></div></div>
+                <div class="benefit-item"><div class="benefit-number">2</div><div class="benefit-text"><h4>Karar Sürecini Hızlandırırız</h4><p>Yöneticilerin ihtiyaç duyduğu KPI'ları, toplantı beklemeden anında görebilmenizi sağlarız.</p></div></div>
+                <div class="benefit-item"><div class="benefit-number">3</div><div class="benefit-text"><h4>Gizli Maliyetleri Tespit Ederiz</h4><p>Gözden kaçan operasyonel maliyetleri ve kârlılığı düşüren sızıntıları gün yüzüne çıkarırız.</p></div></div>
+            </div>
+            <div class="visual-box"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="cta-banner">
+            <h2>Kandemir FinTech'i Yakından Tanıyın</h2>
+            <p>2026 yılında kurulan şirketimizin vizyonunu ve uzman ekibimizin güçlü altyapısını inceleyin.</p>
+            <a href="sirketimiz.html" class="btn-primary" style="padding: 14px 28px;">Şirketimiz & Kurucu Sayfasına Git</a>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Kandemir FinTech</strong> &copy; 2026. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 10px;">İstanbul, Türkiye | <a href="#" class="open-modal-btn" style="color:var(--text-muted);">Bize Yazın</a></p>
+    </footer>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Projeyi Konuşalım</h2>
+            <p>Aşağıdaki formu doldurun, talebiniz doğrudan şahsi e-posta adresime düşsün. Size en kısa sürede dönüş yapacağım.</p>
+            
+            <form action="https://formsubmit.co/kandemirrufuk2@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <div class="input-group">
+                    <label>Adınız Soyadınız / Şirketiniz</label>
+                    <input type="text" name="İsim" required placeholder="Örn: Ahmet Yılmaz">
+                </div>
+                <div class="input-group">
+                    <label>E-posta Adresiniz</label>
+                    <input type="email" name="Email" required placeholder="ornek@sirketiniz.com">
+                </div>
+                <div class="input-group">
+                    <label>Nasıl Yardımcı Olabiliriz?</label>
+                    <textarea name="Mesaj" rows="4" required placeholder="Hangi süreçlerinizi hızlandırmak istiyorsunuz?"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Mesajı Gönder</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <script>
+        // --- FARE EFEKTİ ---
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        const hoverElements = document.querySelectorAll('a, button, input, textarea');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX; const posY = e.clientY;
+            dot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
+            outline.animate({ transform: `translate(${posX}px, ${posY}px) translate(-50%, -50%)` }, { duration: 400, fill: "forwards" });
+        });
+
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => outline.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => outline.classList.remove('cursor-hover'));
+        });
+
+        // --- İLETİŞİM MODALI ---
+        const modal = document.getElementById("contactModal");
+        const closeBtn = document.querySelector(".close-btn");
+        const openBtns = document.querySelectorAll('.open-modal-btn');
+
+        // Butona basıldığında popup'ı aç
+        openBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.style.display = "flex";
+            });
+        });
+
+        // X işaretine veya dışarıya tıklandığında popup'ı kapat
+        closeBtn.addEventListener('click', () => { modal.style.display = "none"; });
+        window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = "none"; });
+    </script>
+</body>
+</html>
