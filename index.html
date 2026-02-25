@@ -209,14 +209,22 @@
             submitBtn.innerText = "Gönderiliyor...";
             formMessage.innerText = "";
 
+            // Form verilerini FormSubmit'in istediği JSON formatına çeviriyoruz
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
             fetch(contactForm.action, {
                 method: 'POST',
-                body: new FormData(contactForm),
-                headers: { 'Accept': 'application/json' }
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
+                if (data.success === "true" || data.success === true) {
                     formMessage.style.color = "#10b981"; 
                     formMessage.innerText = "Mesajınız başarıyla gönderildi!";
                     submitBtn.innerText = "Mesajı Gönder";
