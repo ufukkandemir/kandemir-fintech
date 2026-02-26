@@ -62,7 +62,17 @@
         .benefit-text h4 { font-size: 1.2rem; margin-bottom: 5px; }
         .benefit-text p { color: var(--text-muted); font-size: 0.95rem; }
         .visual-box { background: #e5e7eb; border-radius: var(--radius); height: 400px; background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000'); background-size: cover; background-position: center; }
-
+/* ÖRNEK PROJELER (VİTRİN) STİLLERİ */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 40px; }
+        .project-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .project-img { width: 100%; height: 240px; background-size: cover; background-position: center; border-bottom: 1px solid rgba(0,0,0,0.05); transition: transform 0.5s ease; }
+        .project-card:hover .project-img { transform: scale(1.05); }
+        .img-wrapper { overflow: hidden; width: 100%; height: 240px; }
+        .project-content { padding: 30px; background: var(--surface); position: relative; z-index: 1;}
+        .project-content .tag { display: inline-block; background: rgba(37, 99, 235, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; letter-spacing: 0.5px; text-transform: uppercase;}
+        .project-content h3 { font-size: 1.3rem; margin-bottom: 10px; letter-spacing: -0.5px;}
+        .project-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
         .cta-banner { background: var(--surface); border-radius: var(--radius); padding: 60px; text-align: center; margin-top: 60px; border: 1px solid rgba(0,0,0,0.04); }
         .cta-banner h2 { font-size: 2rem; margin-bottom: 15px; }
         .cta-banner p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
@@ -123,6 +133,7 @@
         </div>
 
         <nav>
+            <a href="#projeler">Örnek Çalışmalar</a>
             <a href="#hizmetler">Hizmetler</a>
             <a href="#faydalar">Çözümler</a>
             <a href="sirketimiz.html">Şirketimiz & Kurucu</a>
@@ -157,6 +168,45 @@
                 <div class="benefit-item"><div class="benefit-number">3</div><div class="benefit-text"><h4>Gizli Maliyetleri Tespit Ederiz</h4><p>Gözden kaçan operasyonel maliyetleri ve kârlılığı düşüren sızıntıları gün yüzüne çıkarırız.</p></div></div>
             </div>
             <div class="visual-box"></div>
+        </div>
+    </section>
+    <section id="projeler">
+        <h2 class="section-title">Örnek Çözümlerimiz</h2>
+        <p class="section-subtitle">Farklı sektörler için kurguladığımız, karmaşık verileri anlık ve aksiyon alınabilir içgörülere dönüştüren dashboard konseptlerimiz.</p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="img-wrapper">
+                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800');"></div>
+                </div>
+                <div class="project-content">
+                    <span class="tag">Finans & Kârlılık</span>
+                    <h3>Dinamik Nakit Akışı Paneli</h3>
+                    <p>Global bir üretim şirketi için hazırlanan; gelir-gider dengesini ve geciken tahsilatları anlık olarak patronun ekranına yansıtan yönetici dashboard'u.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="img-wrapper">
+                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800');"></div>
+                </div>
+                <div class="project-content">
+                    <span class="tag">Sürdürülebilirlik</span>
+                    <h3>Sıfır Atık Veri Analitiği</h3>
+                    <p>Kurumsal firmaların karbon ayak izini ve atık maliyetlerini optimize etmesini sağlayan, çevre ve bütçe dostu modern takip sistemi.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="img-wrapper">
+                    <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=800');"></div>
+                </div>
+                <div class="project-content">
+                    <span class="tag">Risk Yönetimi</span>
+                    <h3>Fraud & Anomali Tespiti</h3>
+                    <p>Şirket içi finansal sızıntıları ve anormal işlemleri yapay zeka destekli algoritmalarla tespit edip anında kırmızı alarm üreten güvenlik kalkanı.</p>
+                </div>
+            </div>
         </div>
     </section>
 
